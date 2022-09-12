@@ -1,0 +1,20 @@
+import requests
+
+url = "https://viacep.com.br/ws/RS/Porto%20Alegre/"
+end = "Domingos"
+formato = "/json/"
+r = requests.get(url + end + formato)
+
+if (r.status_code == 200):
+    print()
+    print("Json: ", r.json())
+    print()
+    
+    conteudo = r.json()
+    
+    for ends in conteudo:
+        print()
+        print(ends)
+        print()
+else:
+    print("Não houve sucesso na requisição.")

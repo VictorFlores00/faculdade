@@ -1,0 +1,28 @@
+from http.client import HTTPSConnection
+from turtle import pd
+import requests
+import json
+import pandas as pd
+import sqlite3
+
+con = None
+dbname = "https://dbhub.io/victor.flores00"
+
+try:
+    con = sqlite3.connect("https://dbhub.io/victor.flores00/bdcotacoes.db")
+    print("db encontrada")
+except sqlite3.Error as e:
+    print(e)
+    exit(1)
+
+r= reponse = requests.get("https://api.hgbrasil.com/finance?format=json-cors&key=5c86982b")
+
+if (r.status_code) == 200:
+    print("Sucess.")
+    print(r.json())
+elif (r.status_code == 404):
+    print("Not found.")
+    
+data_DF = pd.DataFrame(r)
+print(data_DF)
+    
